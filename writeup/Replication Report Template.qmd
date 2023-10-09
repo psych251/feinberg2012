@@ -10,6 +10,16 @@ format:
 
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 
+My focus (in my masters program and generally) is on sustainability. From a psychological lens, I'm particularly interested in how people can be persuaded to care more about the climate crisis and to take action as a result. When focusing specifically on potential climate-psychology interventions in the US, I've reflected on political polarization as being one of the driving forces that diminishes climate care and action; a result like the one shown in Study 3 could provide a really exciting basis for interventions, and honestly I'd just love to replicate it and see for myself if it works. I actually worked in Robb Willer's lab for a few months, some years ago, and remember always being excited about the idea of moral reframing, and although it's been a while since I've worked in the lab and indeed since I've worked in the field of psychology in general, I'm still really intrigued and excited by these ideas.
+
+The stimuli used for this survey-based study are all passages of texts and accompanying pictures in the form of newspaper articles, easy enough to embed in a survey once one actually has those articles. I wasn't able to find the stimuli online, but I have a friend who works closely with Robb Willer's lab, and he already assured me that he can put me in contact with somebody from whom I can procure the stimuli. This may also be helpful if I have trouble tracking down some of the particular scales they used (including the disgust measure and measure of pro-environmental attitudes).
+
+I'm more worried about data analysis, but this is because I'm pretty rusty with statistical methods, and so I think a lot of the process will just be reminding myself of the basics and then potentially learning some new methods, especially the mediation analysis. However, these are skills I've been wanting to brush up on for a while, so I'm excited for the opportunity.
+
+[link to repository](https://github.com/psych251/feinberg2012/tree/main)
+
+[link to original paper](https://github.com/psych251/feinberg2012/blob/main/original_paper/feinberg-willer-2012-the-moral-roots-of-environmental-attitudes.pdf)
+
 ## Introduction
 
 [No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
