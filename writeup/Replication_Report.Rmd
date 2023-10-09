@@ -1,6 +1,6 @@
 ---
-title: "Replication of Study X by Sample & Sample (20xx, Psychological Science)"
-author: "Replication Author[s] (contact information)"
+title: "Replication of The moral roots of environmental attitudes by Feinberg and Willer (2012, Psychological Science)"
+author: "Ariella Chichilnisky du Lac"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
