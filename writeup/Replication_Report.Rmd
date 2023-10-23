@@ -8,22 +8,16 @@ format:
     toc_depth: 3
 ---
 
-<!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
-
-My focus (in my masters program and generally) is on sustainability. From a psychological lens, I'm particularly interested in how people can be persuaded to care more about the climate crisis and to take action as a result. When focusing specifically on potential climate-psychology interventions in the US, I've reflected on political polarization as being one of the driving forces that diminishes climate care and action; a result like the one shown in Study 3 could provide a really exciting basis for interventions, and honestly I'd just love to replicate it and see for myself if it works. I actually worked in Robb Willer's lab for a few months, some years ago, and remember always being excited about the idea of moral reframing, and although it's been a while since I've worked in the lab and indeed since I've worked in the field of psychology in general, I'm still really intrigued and excited by these ideas.
-
-The stimuli used for this survey-based study are all passages of texts and accompanying pictures in the form of newspaper articles, easy enough to embed in a survey once one actually has those articles. I wasn't able to find the stimuli online, but I have a friend who works closely with Robb Willer's lab, and he already assured me that he can put me in contact with somebody from whom I can procure the stimuli. This may also be helpful if I have trouble tracking down some of the particular scales they used (including the disgust measure and measure of pro-environmental attitudes).
-
-I'm more worried about data analysis, but this is because I'm pretty rusty with statistical methods, and so I think a lot of the process will just be reminding myself of the basics and then potentially learning some new methods, especially the mediation analysis. However, these are skills I've been wanting to brush up on for a while, so I'm excited for the opportunity.
-
 [link to repository](https://github.com/psych251/feinberg2012/tree/main)
 
 [link to original paper](https://github.com/psych251/feinberg2012/blob/main/original_paper/feinberg-willer-2012-the-moral-roots-of-environmental-attitudes.pdf)
 
+Note to TAs: this replication will be done in collaboration with a friend of mine, using his sources of funding, as he is also interested in whether this study will replicate. We will be adding in two additional control condition, but the nature of the analyses used in the original study will mean that this work will both demonstrate whether the original study replicates and also show any results from the additional control conditions. We will still just be focusing on Study 3, and primary attention will be paid to the "Environmental attitudes and policy preferences" section of Study 3, but disgust and its potential mediating role will also be measured. 
+
 ## Introduction
 
-[No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
-
+This project aims to both determine whether the findings of Study 3 replicate. It additionally aims to assess whether the nature of the control condition used in the original study affected these findings, by adding in both a control condition with a political message, and a control condition that focuses on environmental topics without using moralized language.
+Note: as this will eventually be published, I'll have a literature review and more in-depth intro in here as well, coming soon.
 
 ## Methods
 
@@ -33,44 +27,56 @@ Original effect size, power analysis for samples to achieve 80%, 90%, 95% power 
 
 ### Planned Sample
 
-Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.
+Sample size - 1000. 500 liberals, 500 conservatives. True independents will not be allowed to take the survey.
 
 ### Materials
 
-All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+The experimental articles:
+
+"The harm/care message described the harm and destruction humans are causing to the environment and emphasized how important it is for people to care about and protect the environment. Participants in the purity/sanctity condition read about how polluted and contaminated the environment has become and how important it is for people to clean and purify the environment. Additionally, three small pictures were presented with the persuasive messages. The purity/sanctity pictures showed a cloud of pollution looming over a city, a person drinking contaminated water, and a forest covered in garbage. The harm/care pictures showed a destroyed forest of tree stumps, a barren coral reef, and cracked land suffering from drought. Importantly, both messages ended positively, providing information regarding what people can do to improve the environment"
+
+The control article:
+
+"Participants in the neutral condition read an apolitical message on the history of neckties."
+
+Two additional control articles, created by my friend and myself, will be added. One will be an article that talks about the environment/climate change but uses morally neutral language, and the other will be a political but non-partisan article (talking about the branches of government or something along those lines).
 
 ### Procedure	
 
-Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+The original study was described as follows:
+
+"Participants completed a demographic questionnaire...Participants in the harm/care and purity/sanctity conditions read a persuasive message modeled after a newspaper op-ed. These messages utilized words typi- cal of their respective moral domains...Participants in the neutral condition read an apolitical message on the history of neckties...After reading the message, participants indicated how much they felt five emotions, including disgust...Participants then completed a 3-item measure of proenvironmental attitudes, a 5-item mea- sure of support for proenvironmental legislation, and a 3-item measure of belief in global warming."
+
+My replication will differ from this in the following way: there will two more control conditions, one with a message about the environment and climate change that uses morally neutral language, and one control condition that describes something political but not partisan. This will allow for a better understanding of whether the large differences from the original control condition had anything to do with the apolitical message that it had, and whether it was the morally valenced language that created differences in proenvironmental 
+
+Additionally, we will be including some attention checks, but not filtering on them.
 
 ### Analysis Plan
 
-Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
+Analyses:
 
-**Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
+Multiple regression analysis that compares the interactions between each of the five conditions and political ideology. Simple slopes analyses comparing both conservatives across conditions, and comparing liberals across conditions, as well as comparing conservatives and liberals within each condition. 
+
+Additional analyses (TBD, over the course of this coming week) to measure the difference between the control conditions and the experimental conditions.
 
 ### Differences from Original Study
 
-Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
+The addition of the control conditions is an obvious difference, but the multiple regression analysis will still allow for the same results to be calculated. Over this coming week, I'll be gaining access to as much of the original materials used as possible; I'll fill in this section when I know what I won't have access to.
 
-### Methods Addendum (Post Data Collection)
-
-You can comment this section out prior to final report with data collection.
+### Methods Addendum (Post Data Collection) 
 
 #### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
 
 #### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
-
 
 ## Results
 
-
 ### Data preparation
 
-Data preparation following the analysis plan.
-	
+For repeat survey-takers, include the data from the first time they took the survey but exclude all other data. If any independents manage to take the survey, remove their data as well.
+
+Create an attention check score column, in which the number of missed attention checks are indicated.
+
 ```{r include=F}
 ### Data Preparation
 
@@ -85,13 +91,15 @@ Data preparation following the analysis plan.
 
 ### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+Multiple regression analysis that compares the interactions between each of the five conditions and political ideology. Again, there are five conditions because we'll be adding in an extra control condition.
+
+Simple slopes analyses comparing both conservatives across conditions, and comparing liberals across conditions, as well as comparing conservatives and liberals within each condition. 
 
 *Side-by-side graph with original graph is ideal here*
 
 ### Exploratory analyses
 
-Any follow-up analyses desired (not required).  
+Actual model TBD (dicussing with my friend this week) but will be comparing the differences between each of the controls and the experimental conditions (e.g. comparing effect sizes, etc.) 
 
 ## Discussion
 
