@@ -12,22 +12,23 @@ format:
 
 [link to original paper](https://github.com/psych251/feinberg2012/blob/main/original_paper/feinberg-willer-2012-the-moral-roots-of-environmental-attitudes.pdf)
 
-Note to TAs: this replication will be done in collaboration with a friend of mine, using his sources of funding, as he is also interested in whether this study will replicate. We will be adding in two additional control condition, but the nature of the analyses used in the original study will mean that this work will both demonstrate whether the original study replicates and also show any results from the additional control conditions. We will still just be focusing on Study 3, and primary attention will be paid to the "Environmental attitudes and policy preferences" section of Study 3, but disgust and its potential mediating role will also be measured. 
+[link to preview the survey]https://stanforduniversity.qualtrics.com/jfe/preview/previewId/c7925870-fb66-4dcb-bcac-aaa3cfa95694/SV_bK1wMQAbLJPkcwS?Q_CHL=preview&Q_SurveyVersionID=current
+
+Note to TAs: this replication will be done in collaboration with a friend of mine, using his sources of funding, as he is also interested in whether this study will replicate. We will be adding in an additional control condition, but the nature of the analyses used in the original study will mean that this work will both demonstrate whether the original study replicates and also show any results from the additional control conditions. We will still just be focusing on Study 3, and primary attention will be paid to the "Environmental attitudes and policy preferences" section of Study 3, but disgust and its potential mediating role will also be measured. 
 
 ## Introduction
 
-This project aims to both determine whether the findings of Study 3 replicate. It additionally aims to assess whether the nature of the control condition used in the original study affected these findings, by adding in both a control condition with a political message, and a control condition that focuses on environmental topics without using moralized language.
-Note: as this will eventually be published, I'll have a literature review and more in-depth intro in here as well, coming soon.
+This project aims to both determine whether the findings of Study 3 replicate. It additionally aims to assess whether the nature of the control condition used in the original study affected these findings, by adding in a control condition that focuses on environmental topics without using moralized language.
 
 ## Methods
 
 ### Power Analysis
 
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+There's no option for a multiple regression with multiple regression coefficients in G*Power. 
 
 ### Planned Sample
 
-Sample size - 1000. 500 liberals, 500 conservatives. True independents will not be allowed to take the survey.
+Sample size - 1000. 
 
 ### Materials
 
@@ -47,21 +48,17 @@ The original study was described as follows:
 
 "Participants completed a demographic questionnaire...Participants in the harm/care and purity/sanctity conditions read a persuasive message modeled after a newspaper op-ed. These messages utilized words typi- cal of their respective moral domains...Participants in the neutral condition read an apolitical message on the history of neckties...After reading the message, participants indicated how much they felt five emotions, including disgust...Participants then completed a 3-item measure of proenvironmental attitudes, a 5-item mea- sure of support for proenvironmental legislation, and a 3-item measure of belief in global warming."
 
-My replication will differ from this in the following way: there will two more control conditions, one with a message about the environment and climate change that uses morally neutral language, and one control condition that describes something political but not partisan. This will allow for a better understanding of whether the large differences from the original control condition had anything to do with the apolitical message that it had, and whether it was the morally valenced language that created differences in proenvironmental 
+My replication will differ from this in the following way: there will one additional control condition with a message about the environment and climate change that uses morally neutral language. This will allow for a deeper understanding of whether it was specifically the morally valenced language that had an effect on conservatives' pro-environmental attitudes.
 
-Additionally, we will be including some attention checks, but not filtering on them.
+Additionally, we will be including some attention checks, but not filtering on them, because the original study did not filter on them.
 
 ### Analysis Plan
 
-Analyses:
-
 Multiple regression analysis that compares the interactions between each of the five conditions and political ideology. Simple slopes analyses comparing both conservatives across conditions, and comparing liberals across conditions, as well as comparing conservatives and liberals within each condition. 
-
-Additional analyses (TBD, over the course of this coming week) to measure the difference between the control conditions and the experimental conditions.
 
 ### Differences from Original Study
 
-The addition of the control conditions is an obvious difference, but the multiple regression analysis will still allow for the same results to be calculated. Over this coming week, I'll be gaining access to as much of the original materials used as possible; I'll fill in this section when I know what I won't have access to.
+The addition of the control conditions is an obvious difference, but the multiple regression analysis will still allow for the same results to be calculated. 
 
 ### Methods Addendum (Post Data Collection) 
 
@@ -73,33 +70,57 @@ The addition of the control conditions is an obvious difference, but the multipl
 
 ### Data preparation
 
-For repeat survey-takers, include the data from the first time they took the survey but exclude all other data. If any independents manage to take the survey, remove their data as well.
+For repeat survey-takers, include the data from the first time they took the survey but exclude all other data. 
 
-Create an attention check score column, in which the number of missed attention checks are indicated.
-
-```{r include=F}
+```{r include=T, message = F}
 ### Data Preparation
 
 #### Load Relevant Libraries and Functions
+library(tidyverse)
+library(qualtRics)
+library(emmeans)
 
 #### Import data
+test <- read_survey('~/Desktop/Test_data.csv')
 
 #### Data exclusion / filtering
 
+test$fail <- (rowSums(test %>% select(fail_ck_1, fail_ck_2)))
+
 #### Prepare data for analysis - create columns etc.
+
+test$harm <- ifelse(test$condition=="lib_exp", 1, 0)
+
+test$orig <- ifelse(test$condition=="orig_con", 1, 0)
+
+test$newcon <- ifelse(test$condition=="env_con", 1, 0)
+
+test$ideology <- scale(test$Pol_ideology)[,1]
+
+test$attitude <- (rowSums(test %>%
+ select(starts_with("GW"), GHG_reduc, Protect_env, Env_rank)) / 8)
+
 ```
 
 ### Confirmatory analysis
 
-Multiple regression analysis that compares the interactions between each of the five conditions and political ideology. Again, there are five conditions because we'll be adding in an extra control condition.
+Multiple regression analysis that compares the interactions between each of the four conditions and political ideology. 
 
-Simple slopes analyses comparing both conservatives across conditions, and comparing liberals across conditions, as well as comparing conservatives and liberals within each condition. 
+Simple slopes analyses comparing both conservatives across conditions, and comparing liberals across conditions, as well as comparing conservatives and liberals within each condition. (haven't added this in yet because I'm trying to figure out whether there's a better way to represent this than simple slopes. it's very unintuitive in the original paper)
+
+NOTE: the test analysis here used randomly generated data from Qualtrics, as I would have needed a lot of friends to take this survey if I wanted to properly conduct this analysis! Thus, it is unsurprising that there is no effect found :).
+
+```{r include=T}
+
+test_model = lm(scale(attitude)~harm*ideology+orig*ideology+newcon*ideology, data = test)
+
+summary(test_model)
+
+````
 
 *Side-by-side graph with original graph is ideal here*
 
 ### Exploratory analyses
-
-Actual model TBD (dicussing with my friend this week) but will be comparing the differences between each of the controls and the experimental conditions (e.g. comparing effect sizes, etc.) 
 
 ## Discussion
 
