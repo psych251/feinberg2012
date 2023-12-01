@@ -12,8 +12,6 @@ format:
 
 [link to original paper](https://github.com/psych251/feinberg2012/blob/main/original_paper/feinberg-willer-2012-the-moral-roots-of-environmental-attitudes.pdf)
 
-[link to preview the survey]https://stanforduniversity.qualtrics.com/jfe/preview/previewId/c7925870-fb66-4dcb-bcac-aaa3cfa95694/SV_bK1wMQAbLJPkcwS?Q_CHL=preview&Q_SurveyVersionID=current
-
 Note to TAs: this replication will be done in collaboration with a friend of mine, using his sources of funding, as he is also interested in whether this study will replicate. We will be adding in an additional control condition, but the nature of the analyses used in the original study will mean that this work will both demonstrate whether the original study replicates and also show any results from the additional control conditions. We will still just be focusing on Study 3, and primary attention will be paid to the "Environmental attitudes and policy preferences" section of Study 3, but disgust and its potential mediating role will also be measured. 
 My friend also added in some additional questions at the end. As these come after the replication, they won't have any effect on the replication. Feel free to just ignore them.
 
@@ -105,16 +103,18 @@ d$ideology <- scale(d$Pol_ideology)[,1]
 d$attitude <- rowSums(d %>%
  select(starts_with("GW"), GHG_reduc, Protect_env, Env_rank)) / 8
 
-
 ```
 
 ### Confirmatory analysis
 
 Multiple regression analysis that compares the interactions between each of the four conditions and political ideology. 
 
-Simple slopes analyses comparing both conservatives across conditions, and comparing liberals across conditions, as well as comparing conservatives and liberals within each condition. (haven't added this in yet because I'm trying to figure out whether there's a better way to represent this than simple slopes. it's very unintuitive in the original paper)
+````{r include = T}
 
-NOTE: the test analysis here used randomly generated data from Qualtrics, as I would have needed a lot of friends to take this survey if I wanted to properly conduct this analysis! Thus, it is unsurprising that there is no effect found :).
+model = lm(attitude~harm*ideology+orig*ideology+newcon*ideology, data = d)
+
+summary(model)
+````
 
 ````{r include = T}
 
@@ -142,24 +142,31 @@ purity_sig = harm_slopes[1,7]
 
 ````
 
+##### Recreating figure 2 from paper
+
 ```{r include=T}
 
-#recreating figure 2 from the paper, the main (and only) figure for this study
-
-model = lm(attitude~harm*ideology+orig*ideology+newcon*ideology, data = d)
+# this section is just making a grid that has each combination of political/conservative and each treatment condition
 
 pred_df <- expand.grid("ideology" = c(-1, 1), "harm" = as.factor(c(0, 1)), "orig" = as.factor(c(0,1)), "newcon" = as.factor(c(0,1)))
 
 pred_df = pred_df %>% filter(!((newcon == 1 & harm == 1) | (newcon == 1 & orig == 1) | (orig == 1 & harm == 1)))
 
+# plugging in the above grid to make predictions
+
 predictions <- predict(model, pred_df, interval = "confidence", se.fit =T)
 
 purity <- as.factor(ifelse(pred_df$harm == 0 & pred_df$orig == 0 & pred_df$newcon == 0, 1, 0))
 
+#adding the predictions to a data frame and recreating the figure in the paper
+
 results <- data.frame(pred_df, purity, predictions$fit, predictions$se.fit)
+
+#adding in the p values to the table
 
 results$significance <- ifelse(results$purity == 1, purity_sig, ifelse(results$harm == 1, harm_sig, ifelse(results$orig == 1, orig_sig, newcon_sig)))
 
+# assigning numbers to each condition just for simplicity
 results$condition <- ifelse(results$purity == 1, 1, ifelse(results$harm == 1, 2, ifelse(results$orig == 1, 3, 4)))
 
 ggplot(results, aes(x = as.factor(condition), fill = as.factor(ideology), y = fit)) +
@@ -170,21 +177,52 @@ ggplot(results, aes(x = as.factor(condition), fill = as.factor(ideology), y = fi
 ```
 
 
-````{r include = T}
+```{r include = T}
 knitr::include_graphics("original_figure.png")
 ```
 
+### Exploratory analyses
+
+```{r include = T}
+
+#means and ttests comparing these means of how disgust differs across conditions
+
+harm_disgust <- subset(d$disgust, d$harm == 1)
+
+orig_disgust <- subset(d$disgust, d$orig == 1)
+
+newcon_disgust <- subset(d$disgust, d$newcon == 1)
+ 
+purity_disgust <- subset(d$disgust, d$harm == 0 & d$orig == 0 & d$newcon == 0)
+
+t.test(purity_disgust, harm_disgust)
+
+t.test(purity_disgust, orig_disgust)
+
+t.test(purity_disgust, newcon_disgust)
+```
+
+
+```{r include = T}
+
+filtered_d <- d %>% filter(harm == 1 | (harm == 0 & newcon == 0 & orig == 0))
+
+disgust_model <- lm(attitude~harm*ideology, data = filtered_d)
+
+summary(disgust_model)
 
 ```
 
 
+```{r include = T}
 
+#testing for mediated moderation
 
-*Side-by-side graph with original graph is ideal here*
+medmod_model = lm(attitude~harm*ideology+orig*ideology+newcon*ideology+disgust*ideology, data = d)
 
-### Exploratory analyses
+#to look for mediated moderation, compare the coefficients of the interaction terms from this model to the coefficients in the original model, if the former are much lower than the latter then the disgustxideology interaction shows mediated moderation
 
-Will be conducting the above analyses also to measure the effect of treatment on level of disgust. Will also be conducting the same disgust mediated moderation analysis (still trying to figure out exactly how to code this up, as it's a little confusing). These are identical to the analyses conducted in the original paper.
+```
 
 ## Discussion
 
